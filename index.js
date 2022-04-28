@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const { append } = require("express/lib/response");
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
@@ -40,7 +41,13 @@ const client = new MongoClient(uri, {
 }
 run().catch(console.dir); */
 
-app.get("/", async (req, res) => {
+// home url
+app.get("/", (req, res) => {
+  res.send("bangla babul store is running");
+});
+
+// get all products
+app.get("/products", async (req, res) => {
   let products = [];
   try {
     await client.connect();
